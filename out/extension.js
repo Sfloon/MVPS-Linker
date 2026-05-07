@@ -156,10 +156,14 @@ function activate(context) {
         channel.show();
         channel.appendLine(`MVPS: Running in: ${workspaceRoot}`);
         cp.execFile(pythonPath, [scriptPath], { cwd: workspaceRoot }, (err, stdout, stderr) => {
-            if (stdout)
+            if (stdout) {
                 channel.appendLine(stdout);
-            if (stderr)
+            }
+            ;
+            if (stderr) {
                 channel.appendLine(stderr);
+            }
+            ;
             if (err) {
                 channel.appendLine(`MVPS Error: ${err.message}`);
                 vscode.window.showErrorMessage("MVPS Linker failed. See Output > MVPS Linker.");
@@ -184,10 +188,14 @@ function activate(context) {
         channel.show();
         channel.appendLine("MVPS: Running linker...");
         cp.execFile(pythonPath, [scriptPath], { cwd: workspaceRoot }, (err, stdout, stderr) => {
-            if (stdout)
+            if (stdout) {
                 channel.appendLine(stdout);
-            if (stderr)
+            }
+            ;
+            if (stderr) {
                 channel.appendLine(stderr);
+            }
+            ;
             if (err) {
                 channel.appendLine(`MVPS Error: ${err.message}`);
                 vscode.window.showErrorMessage("MVPS Linker failed. See Output > MVPS Linker.");

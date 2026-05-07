@@ -130,8 +130,8 @@ export function activate(context: vscode.ExtensionContext) {
     channel.appendLine(`MVPS: Running in: ${workspaceRoot}`);
 
     cp.execFile(pythonPath, [scriptPath], { cwd: workspaceRoot }, (err, stdout, stderr) => {
-      if (stdout) channel.appendLine(stdout);
-      if (stderr) channel.appendLine(stderr);
+      if (stdout) {channel.appendLine(stdout);};
+      if (stderr) {channel.appendLine(stderr);};
 
       if (err) {
         channel.appendLine(`MVPS Error: ${err.message}`);
@@ -162,8 +162,8 @@ export function activate(context: vscode.ExtensionContext) {
     channel.appendLine("MVPS: Running linker...");
 
     cp.execFile(pythonPath, [scriptPath], { cwd: workspaceRoot }, (err, stdout, stderr) => {
-      if (stdout) channel.appendLine(stdout);
-      if (stderr) channel.appendLine(stderr);
+      if (stdout) {channel.appendLine(stdout);};
+      if (stderr) {channel.appendLine(stderr);};
 
       if (err) {
         channel.appendLine(`MVPS Error: ${err.message}`);
