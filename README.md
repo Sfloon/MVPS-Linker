@@ -1,12 +1,4 @@
-<img width="512" height="512" alt="chain" src="https://github.com/user-attachments/assets/5277c100-cec7-4b76-b45d-5e60e0c1fbe9" /><svg width="512" height="512" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg">
-  <g transform="translate(340,340)">
-    <rect x="-280" y="-90" width="340" height="140" rx="70" fill="none" stroke="black" stroke-width="72" transform="rotate(-45)"/>
-    <rect x="-60" y="-50" width="340" height="140" rx="70" fill="none" stroke="black" stroke-width="72" transform="rotate(-45)"/>
-    <rect x="-280" y="-90" width="340" height="140" rx="70" fill="none" stroke="white" stroke-width="30" transform="rotate(-45)"/>
-    <rect x="-60" y="-50" width="340" height="140" rx="70" fill="none" stroke="white" stroke-width="30" transform="rotate(-45)"/>
-  </g>
-</svg>
-
+<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/9ac61b63-f594-4101-8551-2df7a3af475d" />
 
 **Description**
 
