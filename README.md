@@ -7,7 +7,6 @@ correctly along the way.
 
 **Installation**
 
-1. 
 
 **Usage**
 
@@ -18,7 +17,7 @@ To create a VEX multifile Python project:
 2. Create a folder inside the root directory named "codebase", "code", or "scripts"
 3. Insert files inside that folder
 
-When you are ready to download the code to the brain, click on the "Link and Download" button on the extension's UI. It should automatically
+When you are ready to download the code to the brain, click the "Combine" and then "Download" buttons in the extension's UI. It should automatically
 download to the brain. Possible errors in this process (on this extension's end, not VEX) may include:
 
 1. Cyclic require (two or more files require one another simultaneously)
