@@ -2,8 +2,15 @@ from pathlib import Path
 import os
 import ast
 
+POSSIBLE_SOURCE_DIRS = ["codebase", "scripts", "code"]
 SOURCE_DIR = Path("codebase")
 OUTPUT_FILE = Path("src/combined.py")
+
+for dir_name in POSSIBLE_SOURCE_DIRS:
+    dir_path = Path(dir_name)
+    if dir_path.exists():
+        SOURCE_DIR = dir_path
+        break
 
 if not SOURCE_DIR.exists():
     print("MVPS Error: Source directory not found. Please make a folder named 'codebase' and place your scripts inside it.")
