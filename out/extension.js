@@ -109,7 +109,7 @@ class MVPSLinkerViewProvider {
 
         <button class="primary-btn" onclick="run()">Combine</button>
         <button class="primary-btn" onclick="buildAndDownload()">Download</button>
-        <button class="docs-btn" onclick="openDocs()">Documentation</button>
+        <button class="docs-btn" onclick="openDocs()">Repository</button>
 
         <script>
           const vscode = acquireVsCodeApi();
@@ -123,7 +123,7 @@ class MVPSLinkerViewProvider {
           }
 
           function openDocs() {
-            window.open("https://your-documentation-link.com", "_blank");
+            vscode.postMessage({ command: 'openDocs' });
           }
         </script>
       </body>
@@ -135,6 +135,9 @@ class MVPSLinkerViewProvider {
             }
             else if (message.command === "buildAndDownload") {
                 vscode.commands.executeCommand("mvps-linker.buildAndDownload");
+            }
+            else if (message.command === "openDocs") {
+                vscode.env.openExternal(vscode.Uri.parse("https://github.com/tatedel/MVPS-Linker"));
             }
         });
     }

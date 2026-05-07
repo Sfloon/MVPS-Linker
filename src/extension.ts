@@ -87,7 +87,7 @@ class MVPSLinkerViewProvider implements vscode.WebviewViewProvider {
           }
 
           function openDocs() {
-            window.open("https://github.com/tatedel/MVPS-Linker", "_blank");
+            vscode.postMessage({ command: 'openDocs' });
           }
         </script>
       </body>
@@ -99,6 +99,8 @@ class MVPSLinkerViewProvider implements vscode.WebviewViewProvider {
         vscode.commands.executeCommand("mvps-linker.run");
       } else if (message.command === "buildAndDownload") {
         vscode.commands.executeCommand("mvps-linker.buildAndDownload");
+      } else if (message.command === "openDocs") {
+        vscode.env.openExternal(vscode.Uri.parse("https://github.com/tatedel/MVPS-Linker"));
       }
     });
   }
