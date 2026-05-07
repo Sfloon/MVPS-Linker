@@ -45,12 +45,15 @@ class MVPSLinkerViewProvider {
     }
     resolveWebviewView(webviewView) {
         console.log("MVPS Linker webview resolving");
-        webviewView.webview.options = { enableScripts: true };
+        webviewView.webview.options = {
+            enableScripts: true,
+        };
         webviewView.webview.html = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
         <meta charset="UTF-8">
+
         <style>
           body {
             display: flex;
@@ -63,10 +66,13 @@ class MVPSLinkerViewProvider {
             color: var(--vscode-foreground);
             background: var(--vscode-sideBar-background);
           }
-          h2 { font-size: 16px; margin: 0 0 12px 0; }
+
+          h2 {
+            font-size: 16px;
+            margin: 0 0 12px 0;
+          }
+
           button {
-            background: var(--vscode-button-background);
-            color: var(--vscode-button-foreground);
             border: none;
             padding: 8px 16px;
             font-size: 13px;
@@ -76,17 +82,49 @@ class MVPSLinkerViewProvider {
             height: 36px;
             margin-bottom: 8px;
           }
-          button:hover { background: var(--vscode-button-hoverBackground); }
+
+          .primary-btn {
+            background: var(--vscode-button-background);
+            color: var(--vscode-button-foreground);
+          }
+
+          .primary-btn:hover {
+            background: var(--vscode-button-hoverBackground);
+          }
+
+          .docs-btn {
+            background: var(--vscode-editorWidget-background);
+            color: var(--vscode-foreground);
+            border: 1px solid var(--vscode-widget-border);
+          }
+
+          .docs-btn:hover {
+            background: var(--vscode-editorHoverWidget-background);
+          }
         </style>
       </head>
+
       <body>
         <h2>MVPS Linker</h2>
-        <button onclick="run()">Combine</button>
-        <button onclick="buildAndDownload()">Download</button>
+
+        <button class="primary-btn" onclick="run()">Combine</button>
+        <button class="primary-btn" onclick="buildAndDownload()">Download</button>
+        <button class="docs-btn" onclick="openDocs()">Documentation</button>
+
         <script>
           const vscode = acquireVsCodeApi();
-          function run() { vscode.postMessage({ command: 'run' }); }
-          function buildAndDownload() { vscode.postMessage({ command: 'buildAndDownload' }); }
+
+          function run() {
+            vscode.postMessage({ command: 'run' });
+          }
+
+          function buildAndDownload() {
+            vscode.postMessage({ command: 'buildAndDownload' });
+          }
+
+          function openDocs() {
+            window.open("https://your-documentation-link.com", "_blank");
+          }
         </script>
       </body>
       </html>
