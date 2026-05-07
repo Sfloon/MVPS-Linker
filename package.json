@@ -1,0 +1,59 @@
+{
+  "name": "mvps-linker",
+  "displayName": "MVPS Linker",
+  "description": "Flattens a multi-file Python project into a single combined.py",
+  "version": "0.0.1",
+  "publisher": "tatedel",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "icon": "icon.png",
+  "activationEvents": ["onView:mvps-linker.view"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mvps-linker.run",
+        "title": "Run Linker",
+        "category": "MVPS Linker"
+      }
+    ],
+    "configuration": {
+      "title": "MVPS Linker",
+      "properties": {
+        "mvps-linker.pythonPath": {
+          "type": "string",
+          "default": "python3",
+          "description": "Path to the Python interpreter used by MVPS Linker (e.g. /opt/homebrew/bin/python3)"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "mvps-linker-sidebar",
+          "title": "MVPS Linker",
+          "icon": "icon.png"
+        }
+      ]
+    },
+    "views": {
+      "mvps-linker-sidebar": [
+        {
+          "type": "webview",
+          "id": "mvps-linker.view",
+          "name": "MVPS Linker",
+          "icon": "icon.png"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
