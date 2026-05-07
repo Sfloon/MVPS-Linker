@@ -73,7 +73,7 @@ class MVPSLinkerViewProvider implements vscode.WebviewViewProvider {
 
         <button class="primary-btn" onclick="run()">Combine</button>
         <button class="primary-btn" onclick="buildAndDownload()">Download</button>
-        <button class="docs-btn" onclick="openDocs()">Documentation</button>
+        <button class="docs-btn" onclick="openDocs()">Repository</button>
 
         <script>
           const vscode = acquireVsCodeApi();
@@ -87,7 +87,7 @@ class MVPSLinkerViewProvider implements vscode.WebviewViewProvider {
           }
 
           function openDocs() {
-            window.open("https://your-documentation-link.com", "_blank");
+            window.open("https://github.com/tatedel/MVPS-Linker", "_blank");
           }
         </script>
       </body>
