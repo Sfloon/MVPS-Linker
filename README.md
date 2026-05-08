@@ -11,11 +11,9 @@ correctly along the way.
 **Installation**
 
 1. Download "mvps-linker-0.0.1.vsix" from this repo
-2. Run the following command in your terminal:
-```bash
-code --install-extension mvps-linker-0.0.1.vsix
-```
-3. Reopen VS Code
+2. Drag the .vsix file into the extensions bar in VS Code
+3. Click install when prompted
+4. You're done! :)
    
 **Usage**
 
@@ -31,3 +29,6 @@ download to the brain. Possible errors in this process (on this extension's end,
 
 1. Cyclic require (two or more files require one another simultaneously)
 2. Naming conflicts (Brain = Brain() will cause bugs)
+
+**Planned Features**
+1. Optional circular dependency solver
