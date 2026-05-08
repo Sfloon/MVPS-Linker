@@ -1,7 +1,8 @@
 <img width="128" height="128" alt="image" src="https://github.com/user-attachments/assets/9ac61b63-f594-4101-8551-2df7a3af475d" />
 
 
-⚠️ This extension is in early stages of development and should be considered an experimental tech-demo. While I will be actively using and improving it throughout the VEX season, I cannot guarantee full reliability, stability, or safety. It is not recommended for use in critical contexts. If you require a stable and fully tested tool, 
+⚠️ This extension is in early stages of development and should be considered an experimental tech demo. While I will be actively using and improving it throughout the VEX season, 
+I cannot guarantee full reliability, stability, or safety. It is not recommended for use in critical contexts. If you require a stable and fully tested tool, 
 you may prefer to wait until a more mature release in a future season.
 
 **Description**
@@ -15,7 +16,6 @@ scripts into one script, resolving naming conflicts and ensuring dependencies ar
 1. Download "mvps-linker-0.0.1.vsix" from this repo
 2. Drag the .vsix file into the extensions bar in VS Code
 3. Click install when prompted
-4. You're done! :)
 
 Note: You may need to navigate to the extension and accept the disclaimer from VS Code if it does not immediately appear in your sidebar.
    
@@ -29,12 +29,21 @@ To create a VEX multifile Python project:
 3. Insert files inside that folder (files placed in other locations will not be linked)
 
 When you are ready to download the code to the brain, click the "Combine" and then "Download" buttons in the extension's UI. It should automatically
-download to the brain. Possible errors in this process from the extension's mini-linter may include:
+download to the brain. 
+
+**Errors**
+
+Possible errors in this process from the extension's mini-linter may include:
 
 1. Cyclic require (two or more files require one another simultaneously)
 2. Naming conflicts (Brain = Brain() will cause bugs)
 
+Since these errors are common, they are especially accounted for in the code. Unrecognized errors the extension encounters will simply be printed as is. 
+You can guarantee an error is from this particular extension because it will always be prefaced with "MVPS Error: ..." Otherwise, it's likely safe to assume 
+the error was caused by some other party.
+
 **Planned Features**
-1. Optional circular dependency solver (medium priority)
-2. Caching unchanged scripts (low priority - small performance impact)
-3. Built-in multifile project template (medium priority)
+1. Optional automatic circular dependency solver (low priority)
+2. Caching unchanged scripts (high priority)
+4. Built-in multifile project template (medium priority)
+5. Better error checking (medium priority)
