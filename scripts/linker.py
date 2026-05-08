@@ -2,21 +2,20 @@ from pathlib import Path
 import os
 import ast
 
-POSSIBLE_SOURCE_DIRS = ["codebase", "scripts", "code"]
-SOURCE_DIR = Path("codebase")
-OUTPUT_FILE = Path("src/combined.py")
+possible_source_directories = ["codebase", "scripts", "code"]
+output_file = Path("src/combined.py")
+source_directory = None
 
-for dir_name in POSSIBLE_SOURCE_DIRS:
-    dir_path = Path(dir_name)
-    if dir_path.exists():
-        SOURCE_DIR = dir_path
+for name in possible_source_directories:
+    path = Path(name)
+    if path.exists():
+        source_directory = path
         break
 
-if not SOURCE_DIR.exists():
+if source_directory is None:
     print("MVPS Error: Source directory not found. Please make a folder with a valid name and place your scripts inside it.")
     exit(1)
 
-external_imports = set()
 class DangerousAssignmentChecker(ast.NodeVisitor):
     def __init__(self):
         self.dangerous = []
@@ -26,9 +25,7 @@ class DangerousAssignmentChecker(ast.NodeVisitor):
             if isinstance(target, ast.Name):
                 name = target.id
                 if name and name[0].isupper():
-                    self.dangerous.append(
-                        (name, node.lineno)
-                    )
+                    self.dangerous.append((name, node.lineno))
         self.generic_visit(node)
 
 class SymbolCollector(ast.NodeVisitor):
@@ -87,6 +84,7 @@ class Flattener(ast.NodeTransformer):
         self.rename_map = rename_map
         self.alias_map = alias_map
         self.module_names = module_names
+        self.external_imports = set()
 
     def visit_Import(self, node):
         kept = []
@@ -96,12 +94,12 @@ class Flattener(ast.NodeTransformer):
                 kept.append(alias)
         if kept:
             line = ast.unparse(ast.Import(names=kept))
-            external_imports.add(line)
+            self.external_imports.add(line)
         return None
 
     def visit_ImportFrom(self, node):
         if node.module not in self.module_names:
-            external_imports.add(ast.unparse(node))
+            self.external_imports.add(ast.unparse(node))
         return None
 
     def visit_FunctionDef(self, node):
@@ -141,7 +139,7 @@ class Flattener(ast.NodeTransformer):
 module_symbols = {}
 module_paths = {}
 
-for root, dirs, files in os.walk(SOURCE_DIR):
+for root, directories, files in os.walk(source_directory):
     for file in files:
         if not file.endswith(".py"): continue
 
@@ -175,10 +173,9 @@ for module, path in module_paths.items():
     collector = DependencyCollector(module_names)
     collector.visit(tree)
 
-    for ref in collector.referenced:
-        if ref in module_names and ref != module:
-            dependencies[module].add(ref)
-
+    for reference in collector.referenced:
+        if reference in module_names and reference != module:
+            dependencies[module].add(reference)
 
 def topo_sort(dependencies):
     visited = set()
@@ -191,8 +188,8 @@ def topo_sort(dependencies):
 
         if module in visited: return
         visiting.add(module)
-        for dep in dependencies.get(module, []):
-            visit(dep)
+        for dependency in dependencies.get(module, []):
+            visit(dependency)
 
         visiting.remove(module)
         visited.add(module)
@@ -209,6 +206,7 @@ except ValueError as error:
     exit(1)
 
 output_blocks = []
+external_imports = set()
 total = len(sorted_modules)
 
 for index, module in enumerate(sorted_modules, 1):
@@ -225,12 +223,9 @@ for index, module in enumerate(sorted_modules, 1):
     alias_collector.visit(tree)
     alias_map = alias_collector.alias_map
 
-    tree = Flattener(
-        module,
-        rename_map,
-        alias_map,
-        module_names
-    ).visit(tree)
+    flattener = Flattener(module, rename_map, alias_map, module_names)
+    tree = flattener.visit(tree)
+    external_imports |= flattener.external_imports
 
     ast.fix_missing_locations(tree)
     module_code = ast.unparse(tree)
@@ -238,7 +233,7 @@ for index, module in enumerate(sorted_modules, 1):
         f"# {path.name}\n{module_code}"
     )
 
-src_dir = OUTPUT_FILE.parent
+src_dir = output_file.parent
 src_dir.mkdir(exist_ok=True)
 
 for file in src_dir.glob("*.py"):
@@ -255,9 +250,5 @@ final_text = "\n".join(final_code)
 while "\n\n\n" in final_text:
     final_text = final_text.replace("\n\n\n", "\n\n")
 
-OUTPUT_FILE.write_text(
-    final_text,
-    encoding="utf-8"
-)
-
-print(f"MVPS: Successfully linked {total} modules into '{OUTPUT_FILE}'")
+output_file.write_text(final_text, encoding="utf-8")
+print(f"MVPS: Successfully linked {total} modules into '{output_file}'")
