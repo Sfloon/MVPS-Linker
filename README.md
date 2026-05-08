@@ -28,7 +28,22 @@ To create a VEX multifile Python project:
 3. Insert files inside that folder (files placed in other locations will not be linked)
 
 When you are ready to download the code to the brain, click the "Download" button in the extension's UI. It should automatically
-download to the brain. The "Combine" button is more so for debugging than anything.
+download to the brain. The "Combine" button is more for debugging than anything else.
+
+<table>
+<tr>
+<td align="center">
+<img width="164" alt="Screenshot 2026-05-07 at 9 38 02 PM" src="https://github.com/user-attachments/assets/c273f4bb-38e2-4664-a9c2-b4fcb1e29a9e" />
+<br>
+<em>Example file structure</em>
+</td>
+<td align="center">
+<img width="164" alt="Screenshot 2026-05-07 at 9 38 26 PM" src="https://github.com/user-attachments/assets/0e72d946-a917-4317-b146-e0ab69629ee9" />
+<br>
+<em>UI of the extension</em>
+</td>
+</tr>
+</table>
 
 **Errors**
 
