@@ -36,4 +36,6 @@ download to the brain. Possible errors in this process from the extension's mini
 2. Naming conflicts (Brain = Brain() will cause bugs)
 
 **Planned Features**
-1. Optional circular dependency solver
+1. Optional circular dependency solver (medium priority)
+2. Caching unchanged scripts (low priority - small performance impact)
+3. Built-in multifile project template (medium priority)
