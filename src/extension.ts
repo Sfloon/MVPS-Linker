@@ -41,7 +41,7 @@ class MVPSLinkerViewProvider implements vscode.WebviewViewProvider {
             padding: 8px 16px;
             font-size: 13px;
             cursor: pointer;
-            border-radius: 0px;
+            border-radius: 4px;
             width: 100%;
             height: 36px;
             margin-bottom: 8px;

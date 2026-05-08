@@ -75,9 +75,9 @@ class MVPSLinkerViewProvider {
           button {
             border: none;
             padding: 8px 16px;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
-            border-radius: 3px;
+            border-radius: 0px;
             width: 100%;
             height: 36px;
             margin-bottom: 8px;
