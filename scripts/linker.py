@@ -32,10 +32,6 @@ class SymbolCollector(ast.NodeVisitor):
     def __init__(self):
         self.symbols = set()
 
-class SymbolCollector(ast.NodeVisitor):
-    def __init__(self):
-        self.symbols = set()
-
     def visit_FunctionDef(self, node):
         self.symbols.add(node.name)
 
