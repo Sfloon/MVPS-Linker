@@ -100,6 +100,13 @@ class Flattener(ast.NodeTransformer):
             self.external_imports.add(line)
         return None
 
+    def visit_Global(self, node):
+        node.names = [
+            self.rename_map.get(name, self.alias_map.get(name, name))
+            for name in node.names
+        ]
+        return node
+
     def visit_ImportFrom(self, node):
         if node.module not in self.module_names:
             self.external_imports.add(ast.unparse(node))
