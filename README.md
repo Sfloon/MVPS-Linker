@@ -60,7 +60,7 @@ the error was caused by some other party.
 **How it Works**
 
 The [main script](https://github.com/tatedel/MVPS-Linker/blob/main/scripts/linker.py) is a lightweight Python program that runs in accordance with the following flow chart:
-Start → Find source directory → Scan Python files → Collect symbols/warnings → Build dependency graph → Topological sort → Circular dependency check → Flatten + rename modules → Combine transformed code → Write combined.py → Complete
+Start → Find source directory → Scan Python files → Collect symbols/warnings → Build dependency graph → Topological sort → Circular dependency check → Flatten + rename modules → Combine transformed code → Write main.py → Complete
 
 
 **Planned Features**

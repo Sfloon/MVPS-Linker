@@ -3,7 +3,7 @@ import os
 import ast
 
 possible_source_directories = ["codebase", "scripts", "code"]
-output_file = Path("src/combined.py")
+output_file = Path("src/main.py")
 source_directory = None
 
 for name in possible_source_directories:
