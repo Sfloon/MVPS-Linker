@@ -13,7 +13,7 @@ scripts into one script, resolving naming conflicts and ensuring dependencies ar
 **Installation**
 
 1. Ensure VS Code and the VEX Extension is installed
-1. Download "mvps-linker-0.0.1.vsix" from this repo
+1. Download "mvps-linker-0.0.2.vsix" from this repo
 2. Drag the .vsix file into the extensions bar in VS Code
 3. Click install when prompted
 
