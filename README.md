@@ -14,7 +14,7 @@ The MVPS Linker (Multifile VEX Python Support) extension enables multifile Pytho
 ---
 
 - Ensure VS Code, the VEX Extension, and Python 3.9 or newer are installed
-- Download the raw code of the "mvps-linker-0.0.3.vsix" file from this repo
+- Download the raw code of the .vsix file from this repo
 - Drag the file into the extensions bar in VS Code
 - Click install if prompted
 
