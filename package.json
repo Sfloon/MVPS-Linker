@@ -2,7 +2,7 @@
   "name": "mvps-linker",
   "displayName": "MVPS Linker",
   "description": "Enables multi-file VEX Python projects",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "tatedel",
   "engines": { "vscode": "^1.85.0" },
   "categories": ["Other"],
