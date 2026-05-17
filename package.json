@@ -16,6 +16,16 @@
         "command": "mvps-linker.run",
         "title": "Run Linker",
         "category": "MVPS Linker"
+      },
+      {
+        "command": "mvps-linker.buildAndDownload",
+        "title": "Download",
+        "category": "MVPS Linker"
+      },
+      {
+        "command": "mvps-linker.createTemplate",
+        "title": "Create Template",
+        "category": "MVPS Linker"
       }
     ],
     "configuration": {
