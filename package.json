@@ -35,6 +35,11 @@
           "type": "string",
           "default": "python3",
           "description": "Path to the Python interpreter used by MVPS Linker (e.g. /opt/homebrew/bin/python3)"
+        },
+        "mvps-linker.projectsDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Directory where new MVPS projects are created. Defaults to ~/Documents/vex-vscode-projects, then ~/Documents, then home directory if left empty."
         }
       }
     },

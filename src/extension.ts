@@ -52,7 +52,7 @@ class MVPSLinkerViewProvider implements vscode.WebviewViewProvider {
           button {
             border: none;
             padding: 8px 16px;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             border-radius: 4px;
             width: 100%;
@@ -178,11 +178,27 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   const templateCmd = vscode.commands.registerCommand("mvps-linker.createTemplate", async () => {
+    const config = vscode.workspace.getConfiguration("mvps-linker");
+    const customDir = config.get<string>("projectsDirectory")?.trim();
     const vexDir = path.join(os.homedir(), "Documents", "vex-vscode-projects");
     const docsDir = path.join(os.homedir(), "Documents");
-    const parentDir = fs.existsSync(vexDir) ? vexDir
-      : fs.existsSync(docsDir) ? docsDir
-      : os.homedir();
+
+    let parentDir: string;
+    if (customDir) {
+      if (fs.existsSync(customDir)) {
+        parentDir = customDir;
+      } else {
+        const fallback = fs.existsSync(vexDir) ? vexDir
+          : fs.existsSync(docsDir) ? docsDir
+          : os.homedir();
+        vscode.window.showWarningMessage(`MVPS: Projects directory '${customDir}' not found. Defaulting to '${fallback}'.`);
+        parentDir = fallback;
+      }
+    } else {
+      parentDir = fs.existsSync(vexDir) ? vexDir
+        : fs.existsSync(docsDir) ? docsDir
+        : os.homedir();
+    }
 
     const name = await vscode.window.showInputBox({
       prompt: "Project name",
@@ -248,17 +264,7 @@ export function activate(context: vscode.ExtensionContext) {
       fs.writeFileSync(mainPy, "");
     }
 
-    const msg = stubPath
-      ? "MVPS: Template created with VEX stubs detected."
-      : "MVPS: Template created. VEX stubs not found — set python.analysis.stubPath manually.";
-
-    vscode.commands.executeCommand(
-      "vscode.openFolder",
-      vscode.Uri.file(root),
-      { forceNewWindow: false }
-    ).then(() => {
-      vscode.window.showInformationMessage(msg);
-    });
+    vscode.commands.executeCommand("vscode.openFolder", vscode.Uri.file(root), { forceNewWindow: false });
   });
 
   context.subscriptions.push(runCmd, buildCmd, templateCmd);

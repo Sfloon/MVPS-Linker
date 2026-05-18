@@ -84,7 +84,7 @@ class MVPSLinkerViewProvider {
           button {
             border: none;
             padding: 8px 16px;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             border-radius: 4px;
             width: 100%;
@@ -203,11 +203,28 @@ function activate(context) {
         });
     });
     const templateCmd = vscode.commands.registerCommand("mvps-linker.createTemplate", async () => {
+        const config = vscode.workspace.getConfiguration("mvps-linker");
+        const customDir = config.get("projectsDirectory")?.trim();
         const vexDir = path.join(os.homedir(), "Documents", "vex-vscode-projects");
         const docsDir = path.join(os.homedir(), "Documents");
-        const parentDir = fs.existsSync(vexDir) ? vexDir
-            : fs.existsSync(docsDir) ? docsDir
-                : os.homedir();
+        let parentDir;
+        if (customDir) {
+            if (fs.existsSync(customDir)) {
+                parentDir = customDir;
+            }
+            else {
+                const fallback = fs.existsSync(vexDir) ? vexDir
+                    : fs.existsSync(docsDir) ? docsDir
+                        : os.homedir();
+                vscode.window.showWarningMessage(`MVPS: Projects directory '${customDir}' not found. Defaulting to '${fallback}'.`);
+                parentDir = fallback;
+            }
+        }
+        else {
+            parentDir = fs.existsSync(vexDir) ? vexDir
+                : fs.existsSync(docsDir) ? docsDir
+                    : os.homedir();
+        }
         const name = await vscode.window.showInputBox({
             prompt: "Project name",
             placeHolder: "my-vex-project",
